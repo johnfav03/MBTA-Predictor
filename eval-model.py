@@ -25,7 +25,7 @@ print('2023 MAE:', mae)
 results = pd.read_csv('data/results.csv', index_col=0)
 scores = pd.read_csv('data/scores.csv', index_col=0)
 row = pd.DataFrame([{
-    'date': (datetime.now(timezone.gmt) - timedelta(days=1)).date(),
+    'date': (datetime.now(timezone(timedelta(hours=-5))) - timedelta(days=1)).date(),
     'rmse': round(rmse, 2),
     'mae': round(mae, 2),    
 }])
