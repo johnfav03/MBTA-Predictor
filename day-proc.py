@@ -1,5 +1,5 @@
 import requests
-from datetime import datetime, timedelta
+from datetime import datetime, timedelta, timezone
 import pandas as pd
 
 stops = {
@@ -37,10 +37,12 @@ routes = {
 outbound = [71150, 70152, 70154, 70156, 70158, 70200, 70201]
 inbound = [70202, 70196, 70159, 70157, 70155, 70153, 71151]
 
-prev_day = (datetime.now() - timedelta(days=1))
+prev_day = (datetime.now(timezone.gmt) - timedelta(days=1))
 beg_time = int(prev_day.replace(hour=4, minute=0, second=0, microsecond=0).timestamp())
 end_time = int(prev_day.replace(hour=23, minute=59, second=0, microsecond=0).timestamp())
 
+print(beg_time)
+print(end_time)
 
 month_day = prev_day.day
 week_day = prev_day.weekday()

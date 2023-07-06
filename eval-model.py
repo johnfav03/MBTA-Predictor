@@ -1,4 +1,4 @@
-from datetime import datetime, timedelta
+from datetime import datetime, timedelta, timezone
 import pandas as pd
 from sklearn.preprocessing import StandardScaler
 from sklearn.metrics import mean_squared_error, mean_absolute_error
@@ -25,7 +25,7 @@ print('2023 MAE:', mae)
 results = pd.read_csv('data/results.csv', index_col=0)
 scores = pd.read_csv('data/scores.csv', index_col=0)
 row = pd.DataFrame([{
-    'date': (datetime.now() - timedelta(days=1)).date(),
+    'date': (datetime.now(timezone.gmt) - timedelta(days=1)).date(),
     'rmse': round(rmse, 2),
     'mae': round(mae, 2),    
 }])
