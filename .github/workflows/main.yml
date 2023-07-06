@@ -1,0 +1,32 @@
+name: Run Daily Script
+on:
+  schedule:
+    - cron: "13 40 * * *"
+
+jobs:
+  run-script:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Set up Python
+        uses: actions/setup-python@v2
+        with:
+          python-version: '3.11.3'  # Replace with the Python version you want to use
+
+      - name: Update yesterday CSV
+        run: python day-proc.py
+        
+      - name: Evaluate model
+        run: python eval-model.py
+        
+      - name: Commit and push changes
+        run: |
+          git config --local user.email "action@github.com"
+          git config --local user.name "GitHub Action"
+          git add data/LR-yesterday.csv
+          git add data/results.csv
+          git add data/scores.csv
+          git commit -m "Update CSV files"
+          git push
