@@ -45,3 +45,6 @@ results = pd.concat([results, rows], ignore_index=True)
 
 scores.to_csv('data/scores.csv')
 results.to_csv('data/results.csv')
+
+model.fit(X_reshape, y, epochs=25, batch_size=16)
+model.save(file)
