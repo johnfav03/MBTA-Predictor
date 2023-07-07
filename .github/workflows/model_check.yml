@@ -39,5 +39,9 @@ jobs:
           git add data/LR-yesterday.csv
           git add data/results.csv
           git add data/scores.csv
-          git commit -m "Update CSV files"
+          git add lstm-model.h5
+          git commit -m "Update CSV files and model"
           git push
+
+      - name: LIVE TOTALS
+        run: python live-totals.py
