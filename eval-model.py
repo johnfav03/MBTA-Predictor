@@ -9,7 +9,8 @@ import os
 file = 'lstm-model.h5'
 model = load_model(file)
 df = pd.read_csv('data/LR-yesterday.csv')
-print(os.path.exists('data/LR-yesterday.csv'))
+absolute_path = os.path.abspath('data/LR-yesterday.csv')
+print(absolute_path)
 
 X = df[['stop_id', 'route_id', 'week_day', 'month_day', 'start_time']].values
 y = df['travel_time'].values
