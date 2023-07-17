@@ -7,12 +7,7 @@ import numpy as np
 
 file = 'lstm-model.h5'
 model = load_model(file)
-try:
-    df = pd.read_csv('data/LR-yesterday.csv')
-    print(f"Number of lines in DataFrame: {len(df)}")
-except Exception as e:
-    print("Error occurred:", e)
-    raise
+df = pd.read_csv('data/LR-yesterday.csv')
 
 X = df[['stop_id', 'route_id', 'week_day', 'month_day', 'start_time']].values
 y = df['travel_time'].values
