@@ -4,6 +4,7 @@ from sklearn.preprocessing import StandardScaler
 from sklearn.metrics import mean_squared_error, mean_absolute_error
 from tensorflow.keras.models import load_model
 import numpy as np
+import os
 
 file = 'lstm-model.h5'
 model = load_model(file)
