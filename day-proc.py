@@ -93,3 +93,5 @@ for i in range(6):
         }])
         yesterday = pd.concat([yesterday, row], ignore_index=True)
 yesterday.to_csv('data/LR-yesterday.csv')
+
+print(f'Lines: {len(yesterday)}')

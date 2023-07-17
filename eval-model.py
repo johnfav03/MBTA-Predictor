@@ -4,12 +4,15 @@ from sklearn.preprocessing import StandardScaler
 from sklearn.metrics import mean_squared_error, mean_absolute_error
 from tensorflow.keras.models import load_model
 import numpy as np
-import os
 
 file = 'lstm-model.h5'
 model = load_model(file)
-df = pd.read_csv('/home/runner/work/MBTA-Predictor/MBTA-Predictor/data/LR-yesterday.csv')
-print(len(df))
+try:
+    df = pd.read_csv('data/LR-yesterday.csv')
+    print(f"Number of lines in DataFrame: {len(df)}")
+except Exception as e:
+    print("Error occurred:", e)
+    raise
 
 X = df[['stop_id', 'route_id', 'week_day', 'month_day', 'start_time']].values
 y = df['travel_time'].values
