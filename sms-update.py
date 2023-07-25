@@ -1,5 +1,6 @@
 import smtplib
 import pandas as pd
+from datetime import datetime
 carriers = {
 	'att':    '@mms.att.net',
 	'tmobile':' @tmomail.net',
@@ -9,8 +10,9 @@ carriers = {
 
 def send(message):
         # Replace the number with your own, or consider using an argument\dict for multiple people.
-	to_number = '2488789412{}'.format(carriers['verizon'])
-	auth = ('johnfav03@gmail.com', 'oqkklhetmrhvmerl')
+	to_number_A = '2488789412{}'.format(carriers['verizon'])
+	to_number_B = '9787276138{}'.format(carriers['verizon'])
+	auth = ('tpredsms@gmail.com', 'znfnrsfofosyskvg')
 
 	# Establish a secure session with gmail's outgoing SMTP server using your gmail account
 	server = smtplib.SMTP( "smtp.gmail.com", 587 )
@@ -19,12 +21,12 @@ def send(message):
 	print(message)
 
 	# Send text message through SMS gateway of destination number
-	server.sendmail( auth[0], to_number, message)
+	server.sendmail( auth[0], to_number_A, message)
+	server.sendmail( auth[0], to_number_B, message)
 	
 scores = pd.read_csv('data/scores.csv')
-total_rmse = scores['rmse'].mean()
 total_mae = scores['mae'].mean()
-daily_rmse = scores['rmse'].iloc[-1]
 daily_mae = scores['mae'].iloc[-1]
-res = "Daily >> [" + str(daily_mae) + ", " + str(daily_rmse) + "]\nTotal >> [" + str(round(total_mae, 2)) + ", " + str(round(total_rmse, 2)) + "]"
+curr_time = datetime.now()
+res = str(curr_time.strftime('[%m/%d] ')) + str(round(daily_mae, 2)) + ", " + str(round(total_mae, 2))
 send(res)
