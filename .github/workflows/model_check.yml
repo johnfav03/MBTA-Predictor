@@ -24,12 +24,19 @@ jobs:
           pip install scikit-learn
           pip install numpy
           pip install tensorflow
+          pip install smtplib
 
       - name: Update yesterday CSV
         run: python day-proc.py
         
       - name: Evaluate model
         run: python eval-model.py
+
+      - name: Live totals
+        run: python live-totals.py
+      
+      - name: Send SMS
+        run: python sms-update.py
         
       - name: Commit and push changes
         run: |
@@ -42,6 +49,3 @@ jobs:
           git add lstm-model.h5
           git commit -m "Update CSV files and model"
           git push
-
-      - name: LIVE TOTALS
-        run: python live-totals.py

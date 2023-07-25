@@ -55,10 +55,8 @@ yesterday = pd.DataFrame(columns=['week_day','route_id','start_time','travel_tim
 for i in range(6):
     suffix = f'&from_stop={outbound[i]}&to_stop={outbound[i+1]}'
     url = url_base + suffix
-    print(f"Querying url: {url}")
     response = requests.get(url)
     data = response.json()['travel_times']
-    print(f"Data size: {data}")
     for d in data:
         route_id = routes[d['route_id']]
         epoch_time = datetime.fromtimestamp(int(d['dep_dt']))
