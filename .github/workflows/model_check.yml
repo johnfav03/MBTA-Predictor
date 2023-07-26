@@ -24,7 +24,6 @@ jobs:
           pip install scikit-learn
           pip install numpy
           pip install tensorflow
-          pip install smtplib
 
       - name: Update yesterday CSV
         run: python day-proc.py
